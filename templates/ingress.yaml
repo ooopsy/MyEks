@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:1111122223333:certificate/aaaaaaab-bbbb-4ae8-90e6-447d9c6d6481
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+spec:
+spec:
+  rules:
+  - host: sso.sad-waterdeer.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-keycloak-http
+            port:
+              number: 80

@@ -1,0 +1,40 @@
+keycloak:
+  fullname: my-keycloak
+  cli:
+    enabled: false
+  ingress:
+    enabled: false
+  postgresql:
+    enabled: false
+  service:
+    type: NodePort
+  extraEnv: |
+    - name: DB_VENDOR
+      value: mysql
+    - name: DB_ADDR
+      valueFrom:
+        configMapKeyRef:
+          name: my-config           
+          key: db.host
+    - name: DB_PORT
+      valueFrom:
+        configMapKeyRef:
+          name: my-config           
+          key: db.port
+    - name: DB_DATABASE
+      valueFrom:
+        configMapKeyRef:
+          name: my-config           
+          key: db.schema
+    - name: DB_USER
+      valueFrom:
+        configMapKeyRef:
+          name: my-config           
+          key: db.user
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: my-secret
+          key: db.password
+          optional: false 
+
