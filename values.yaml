@@ -1,4 +1,11 @@
 keycloak:
+  image: 
+    # The Keycloak image repository
+    repository: ooopsy1988/my-keycloak
+    # Overrides the Keycloak image tag whose default is the chart appVersion
+    tag: "amd-latest"
+    # The Keycloak image pull policy
+    pullPolicy: IfNotPresent
   fullname: my-keycloak
   cli:
     enabled: false

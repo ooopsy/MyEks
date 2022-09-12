@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:1111122223333:certificate/aaaaaaab-bbbb-4ae8-90e6-447d9c6d6481
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:382369480161:certificate/2f368c89-9ba4-4a10-9d20-895330b6ce7a
     alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
 spec:
@@ -21,3 +21,23 @@ spec:
             name: my-keycloak-http
             port:
               number: 80
+  - host: kanban.sad-waterdeer.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kanban-frontend
+            port:
+              number: 80
+  - host: kanban-backend.sad-waterdeer.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kanban-backend
+            port:
+              number: 80   
